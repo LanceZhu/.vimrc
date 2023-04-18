@@ -10,7 +10,7 @@ endif
 call plug#begin()
   Plug 'preservim/nerdtree'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'liuchengxu/vista.vim'
+	" Plug 'liuchengxu/vista.vim'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'luochen1990/rainbow'
 	Plug 'tomtom/tcomment_vim'
@@ -21,7 +21,7 @@ call plug#begin()
   " Plug 'arzg/vim-colors-xcode'
 	Plug 'danilo-augusto/vim-afterglow'
 	Plug 'vim-airline/vim-airline'
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
   Plug 'joshdick/onedark.vim'
 
 	Plug 'airblade/vim-gitgutter'
@@ -52,6 +52,7 @@ nnoremap <C-f> :NERDTreeFind<CR>
 set number
 set relativenumber
 set cursorline
+set mouse=a
 
 set expandtab
 set tabstop=2
@@ -72,6 +73,9 @@ set ignorecase
 set smartcase
 
 set incsearch
+
+" regex
+set re=0
 
 " set autochdir
 
@@ -141,6 +145,7 @@ noremap tmi :+tabmove<CR>
 noremap bn :bn<CR>
 noremap bp :bp<CR>
 noremap bd :bd<CR>
+noremap bD :%bd\|e#<CR>
 
 " ===
 " === Terminal Behaviors
@@ -282,4 +287,15 @@ vmap <silent> <C-l> <Plug>(coc-codegeex-translate-keymap)
 
 " === coc-explorer
 nnoremap <Leader>op :CocCommand explorer<CR>
-autocmd VimEnter * :CocCommand explorer
+nnoremap <Leader>od :CocDiagnostics<CR>
+nnoremap <Leader>oo :CocOutline<CR>
+" autocmd VimEnter * :CocCommand explorer
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
