@@ -23,6 +23,7 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'
   " Plug 'sheerun/vim-polyglot'
   Plug 'joshdick/onedark.vim'
+  Plug 'ayu-theme/ayu-vim'
 
 	Plug 'airblade/vim-gitgutter'
 	Plug 'peitalin/vim-jsx-typescript'
@@ -53,6 +54,7 @@ set number
 set relativenumber
 set cursorline
 set mouse=a
+" set paste
 
 set expandtab
 set tabstop=2
@@ -123,8 +125,8 @@ noremap sl :set splitright<CR>:vsplit<CR>
 " Resize splits with arrow keys
 noremap <up> :res -5<CR>
 noremap <down> :res +5<CR>
-noremap <left> :vertical resize+5<CR>
-noremap <right> :vertical resize-5<CR>
+noremap <left> :vertical resize-5<CR>
+noremap <right> :vertical resize+5<CR>
 
 " ===
 " === Tab management
@@ -163,6 +165,9 @@ noremap <LEADER>T :term<CR>
 " === Plug Config
 " ===
 
+" ===
+" === colorscheme
+" ===
 " vim-colors-xcode
 " colorscheme xcodedark
 " set termguicolors
@@ -171,11 +176,24 @@ noremap <LEADER>T :term<CR>
 let g:rainbow_active = 1
 
 " danilo-augusto/vim-afterglow
+" syntax enable
 " colorscheme afterglow
 
+" set background=dark
+" let g:solarized_termcolors=256
+" colorscheme solarized
+
 " joshdick/onedark
-syntax on
-colorscheme onedark
+" syntax on
+" colorscheme onedark
+
+" colorschema habamax
+"
+set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " vim-airlline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -238,11 +256,14 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)"
 
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD :split<CR>:call CocAction('jumpDefinition')<CR>
+nmap <silent> gD :vsplit<CR>:call CocAction('jumpDefinition')<CR>
 
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
